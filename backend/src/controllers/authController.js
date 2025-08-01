@@ -39,6 +39,33 @@ export const getAllUsers = async (req, res) => {
 };
 
 
+//getSingleUser
+export const getUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+   
+    const user = await User.findById(id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error fetching user",
+      error: error.message,
+    });
+  }
+};
 
 
 
