@@ -2,7 +2,7 @@ import Product from "../models/productModel.js";
 
 export const createProduct = async (req, res) => {
   const { name, price, stock, description,category } = req.body;  
- const imagePath = req.file ? `http://localhost:8000/uploads/${req.file.filename}` : '';
+ const imagePath = req.file ? `http://localhost:8000/uploads/productImages/${req.file.filename}` : '';
   const product = new Product({
     name,
     price,
@@ -38,14 +38,18 @@ export const deleteProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   const product = await Product.findById(req.params.id);
-  if (!product) return res.status(404).json({ message: "Not found" });
+  if (!product) return res.status(404).json({ message: 'Product not found' });
 
   product.name = req.body.name;
   product.price = req.body.price;
   product.stock = req.body.stock;
+  product.category = req.body.category;
   product.description = req.body.description;
-  product.image = req.body.image;
+
+  if (req.file) {
+    product.image = `http://localhost:8000/uploads/productImages/${req.file.filename}`;
+  }
 
   await product.save();
-  res.json(product);
+  res.status(200).json(product);
 };

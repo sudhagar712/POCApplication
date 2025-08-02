@@ -11,6 +11,8 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: "seller",
     },
+   
+
     password: { type: String, required: true },
   },
   { timestamps: true }

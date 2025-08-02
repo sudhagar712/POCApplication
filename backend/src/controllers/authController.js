@@ -1,6 +1,8 @@
 import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
 
+
+//signup
 export const register = async (req, res) => {
   const { name, email, password} = req.body;
 
@@ -14,10 +16,12 @@ export const register = async (req, res) => {
     name: user.name,
     email: user.email,
     role: user.role,
+   
     token:jwt,
   });
 };
 
+//login
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -33,10 +37,14 @@ export const login = async (req, res) => {
   });
 };
 
+
+//getAllusers
 export const getAllUsers = async (req, res) => {
   const users = await User.find();
   res.json(users);
 };
+
+
 
 
 //getSingleUser
@@ -67,6 +75,20 @@ export const getUser = async (req, res) => {
   }
 };
 
+
+//deleteUser by admin
+
+export const deleteUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    await user.deleteOne();
+    res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Delete failed" });
+  }
+};
 
 
 
