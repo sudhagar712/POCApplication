@@ -25,8 +25,8 @@ const Navbar = () => {
   return (
     <div className="p-4 md:px-10 shadow-md bg-white flex justify-between items-center">
       <Link to="/">
-        <h1 className="text-xl md:text-3xl font-bold text-blue-800 hover:text-blue-600 transition-all">
-          MyLogo
+        <h1 className="text-xl md:text-2xl font-bold md:px-10 text-blue-800 hover:text-blue-600 transition-all">
+          Logo
         </h1>
       </Link>
 

@@ -11,10 +11,9 @@ const Home = () => {
     return <h1>Loading...</h1>;
   }
 
-  // Get unique categories
   const categories = ["All", ...new Set(products?.map((item) => item.category))];
 
-  // Filtered products based on search and category
+ 
   const filteredProducts = products?.filter((product) => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
@@ -22,13 +21,13 @@ const Home = () => {
   });
 
   return (
-    <div className="px-4 md:px-10">
+    <div className="px-4 md:px-10 ">
       <h1 className="text-center mt-5 text-xl md:text-3xl  font-bold text-blue-900">
         Our Products
       </h1>
 
       {/* Search Box */}
-      <div className="flex flex-col sm:flex-row justify-between items-center mt-6 gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center md:p-10    gap-4">
         <input
           type="text"
           placeholder="Search by product name..."
